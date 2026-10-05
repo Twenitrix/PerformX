@@ -1,0 +1,31 @@
+# Build outputs
+target/
+*.class
+performx-backend/target/
+
+# Node dependencies & frontend builds
+node_modules/
+dist/
+dist-ssr/
+performx-frontend/node_modules/
+performx-frontend/dist/
+*.local
+
+# Tools and package manager caches
+.tools/
+*.log
+
+# Scratch test files
+test_api.ps1
+
+# OS and IDE files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.iml
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

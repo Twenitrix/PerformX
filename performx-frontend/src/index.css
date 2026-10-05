@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { -webkit-font-smoothing: antialiased; }
+  body { @apply bg-slate-50 text-ink font-sans dark:bg-slate-950 dark:text-slate-100; }
+  :focus-visible { @apply outline-none ring-2 ring-brand-500/60 ring-offset-1 ring-offset-white dark:ring-offset-slate-900; }
+}
+
+@layer components {
+  .card { @apply bg-white border border-slate-200/80 rounded-xl shadow-card dark:bg-slate-900 dark:border-slate-800; }
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-lg px-3.5 py-2 text-sm font-medium transition-[background-color,color,border-color,transform] duration-150 active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none; }
+  .btn-primary { @apply btn bg-brand-600 text-white hover:bg-brand-700; }
+  .btn-secondary { @apply btn bg-white text-ink-soft border border-slate-200 hover:bg-slate-50 dark:bg-slate-900 dark:text-slate-200 dark:border-slate-700 dark:hover:bg-slate-800; }
+  .btn-danger { @apply btn bg-rose-600 text-white hover:bg-rose-700; }
+  .btn-ghost { @apply btn text-ink-muted hover:bg-slate-100 hover:text-ink dark:hover:bg-slate-800 dark:hover:text-slate-100; }
+  .input { @apply w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-ink placeholder:text-slate-400 transition-colors focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/20 disabled:bg-slate-50 dark:bg-slate-900 dark:border-slate-700 dark:text-slate-100; }
+  .label { @apply block text-xs font-medium text-ink-soft mb-1.5 dark:text-slate-300; }
+  .th { @apply px-4 py-2.5 text-left text-[11px] font-semibold uppercase tracking-wider text-ink-muted whitespace-nowrap; }
+  .td { @apply px-4 py-3 text-sm text-ink-soft whitespace-nowrap dark:text-slate-300; }
+  .page-title { @apply text-xl sm:text-2xl font-semibold tracking-tight text-ink dark:text-white; }
+  .page-sub { @apply text-sm text-ink-muted mt-1; }
+  .section-title { @apply text-sm font-semibold text-ink dark:text-white; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 8px; }
+.dark ::-webkit-scrollbar-thumb { background: #334155; }
