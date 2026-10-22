@@ -3,7 +3,11 @@ name: Build & Deploy PerformX to AWS
 on:
   push:
     branches: [ main ]
+    tags: [ 'v*' ]
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   build-and-verify:
@@ -39,6 +43,9 @@ jobs:
           npm ci
           npm run build
 
+      - name: Package Frontend Production Bundle (ZIP)
+        run: cd performx-frontend/dist && zip -r ../../performx-frontend-v1.0.0-dist.zip .
+
       - name: Upload Frontend dist Artifact
         uses: actions/upload-artifact@v4
         with:
@@ -50,3 +57,25 @@ jobs:
         with:
           name: performx-backend-jar
           path: performx-backend/target/performx-backend-1.0.0.jar
+
+      - name: Publish GitHub Release on Tag
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "⚡ PERFORMX ${{ github.ref_name }} — Enterprise AWS Cloud Release"
+          body: |
+            ### 🌐 Live Cloud Deployment (AWS `us-east-1`)
+            - **🚀 Primary Production App (HTTPS / HTTP/3):** [https://performx-app.duckdns.org](https://performx-app.duckdns.org)
+            - **🌍 Global AWS CloudFront CDN:** [https://dyfjpjuaxaevz.cloudfront.net](https://dyfjpjuaxaevz.cloudfront.net)
+            - **🩺 Live REST API Health Probe:** [https://performx-app.duckdns.org/api/v1/health](https://performx-app.duckdns.org/api/v1/health)
+
+            ---
+
+            ### 📦 Release Artifacts Included
+            - **`performx-backend-1.0.0.jar`**: Standalone Spring Boot 3.3.4 (Java 21) executable JAR with embedded Tomcat, Spring Security 6 (`HS384` JWT), Persistent H2, and PostgreSQL (Amazon RDS) driver.
+            - **`performx-frontend-v1.0.0-dist.zip`**: Minified React 18 + Vite 5 + Tailwind CSS 3.4 production bundle ready for Amazon S3 + CloudFront.
+          files: |
+            performx-backend/target/performx-backend-1.0.0.jar
+            performx-frontend-v1.0.0-dist.zip
+          draft: false
+          prerelease: false
