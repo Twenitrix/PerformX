@@ -10,6 +10,7 @@ import jakarta.validation.Valid;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +24,11 @@ public class WorkspaceController {
 
     public WorkspaceController(ChatService chat, WorkspaceService ws, InsightService insights) {
         this.chat = chat; this.ws = ws; this.insights = insights;
+    }
+
+    @GetMapping("/health")
+    public Api.Response<Map<String, Object>> health() {
+        return Api.ok(Map.of("status", "UP", "service", "performx-backend", "timestamp", Instant.now().toString()));
     }
 
     @GetMapping("/chats") public Api.Response<List<Map<String, Object>>> chats(@AuthenticationPrincipal AuthUser a) { return Api.ok(chat.list(a)); }

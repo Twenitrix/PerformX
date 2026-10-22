@@ -2,6 +2,7 @@
 target/
 *.class
 performx-backend/target/
+performx-backend/data/
 
 # Node dependencies & frontend builds
 node_modules/
@@ -10,6 +11,8 @@ dist-ssr/
 performx-frontend/node_modules/
 performx-frontend/dist/
 *.local
+.env
+.env.production
 
 # Tools and package manager caches
 .tools/

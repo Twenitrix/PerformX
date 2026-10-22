@@ -1,0 +1,52 @@
+name: Build & Deploy PerformX to AWS
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-and-verify:
+    name: Build Backend (Java 21) & Frontend (Vite)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Build Spring Boot Backend JAR
+        working-directory: ./performx-backend
+        run: mvn clean package -DskipTests
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: performx-frontend/package-lock.json
+
+      - name: Install & Build React Frontend
+        working-directory: ./performx-frontend
+        env:
+          VITE_API_BASE_URL: ${{ vars.VITE_API_BASE_URL || '/api/v1' }}
+        run: |
+          npm ci
+          npm run build
+
+      - name: Upload Frontend dist Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: performx-frontend-dist
+          path: performx-frontend/dist/
+
+      - name: Upload Backend JAR Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: performx-backend-jar
+          path: performx-backend/target/performx-backend-1.0.0.jar
