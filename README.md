@@ -4,6 +4,9 @@
 ### Enterprise Employee Performance Management System (EPMS)
 *Manage work. Measure performance. Build better teams.*
 
+## 🚀 **Live Website:** [https://performx-app.duckdns.org](https://performx-app.duckdns.org)
+*(Backup AWS CloudFront URL: [https://dyfjpjuaxaevz.cloudfront.net](https://dyfjpjuaxaevz.cloudfront.net))*
+
 [![Live Deployment](https://img.shields.io/badge/LIVE_PRODUCTION-performx--app.duckdns.org-4F46E5?style=for-the-badge&logo=amazonaws&logoColor=white)](https://performx-app.duckdns.org)
 [![AWS CloudFront](https://img.shields.io/badge/AWS_CDN-CloudFront_%2B_S3-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white)](https://dyfjpjuaxaevz.cloudfront.net)
 [![API Status](https://img.shields.io/badge/API_HEALTH-ONLINE_(200_OK)-10B981?style=for-the-badge&logo=springboot&logoColor=white)](https://performx-app.duckdns.org/api/v1/health)
