@@ -12,7 +12,7 @@ mvn -version
 
 # 2. Build the Spring Boot Backend
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-BACKEND_DIR="${SCRIPT_DIR}/../performx-backend"
+BACKEND_DIR="$(cd "${SCRIPT_DIR}/../performx-backend" && pwd)"
 
 cd "${BACKEND_DIR}"
 echo "Building PerformX backend JAR..."
@@ -62,8 +62,8 @@ sudo systemctl daemon-reload
 sudo systemctl enable performx
 sudo systemctl restart performx
 
-echo "Waiting for PerformX backend to start..."
-sleep 5
+echo "Waiting 15 seconds for PerformX backend to start and seed demo data..."
+sleep 15
 sudo systemctl status performx --no-pager
 echo ""
 echo "Health check:"
