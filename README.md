@@ -7,6 +7,14 @@ Built strictly according to enterprise Role-Based Access Control (RBAC) and norm
 
 ---
 
+## 🌐 Live AWS Cloud Deployment
+
+- **Live Web App (AWS CloudFront + S3 + EC2):** **[https://dyfjpjuaxaevz.cloudfront.net](https://dyfjpjuaxaevz.cloudfront.net)**
+- **Live API Health Endpoint:** **[https://dyfjpjuaxaevz.cloudfront.net/api/v1/health](https://dyfjpjuaxaevz.cloudfront.net/api/v1/health)**
+- **Deployment Architecture & Runbook:** See [`AWS_DEPLOYMENT_GUIDE.md`](./AWS_DEPLOYMENT_GUIDE.md)
+
+---
+
 ## 🚀 Key Highlights & Architecture
 
 ### 1. Three Distinct Role Workflows
@@ -34,17 +42,22 @@ The system implements all 9 ER diagram entities:
   - Java 21 / 24
   - Spring Boot 3.3.4 (Web, Data JPA, Security 6, Validation)
   - JJWT (JSON Web Token 0.12.6)
-  - H2 In-Memory Database (`jdbc:h2:mem:performx`)
+  - H2 Database (In-Memory / Persistent File) & PostgreSQL (Amazon RDS ready)
 - **Frontend**:
   - React 18 + Vite 5
   - Tailwind CSS 3.4 (Custom design tokens & responsive components)
   - Lucide React Icons
   - Recharts (Data visualizer & score progression charts)
   - Axios with JWT Interceptors
+- **Cloud & DevOps (AWS)**:
+  - **Amazon EC2** (Ubuntu 24.04 LTS, Java 21 `systemd` service)
+  - **Amazon S3** (Private static frontend bucket with Origin Access Control)
+  - **Amazon CloudFront** (Global HTTPS CDN + `/api/*` reverse proxy to EC2)
+  - **GitHub Actions** (Automated CI build verification & artifact packaging)
 
 ---
 
-## 🏁 Quick Start
+## 🏁 Quick Start (Local Development)
 
 ### Prerequisites
 - Java JDK 17+ (or 21/24)
